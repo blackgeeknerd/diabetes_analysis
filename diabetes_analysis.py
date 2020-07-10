@@ -11,20 +11,12 @@ diabetes = datasets.load_diabetes()
 diabetes_X = diabetes.data[:, np.newaxis, 2]
 
 #Split the data into training/testing sets
-diabetes_X_train = diabetes_X[:20]
+diabetes_X_train = diabetes_X[:-20]
 diabetes_X_test = diabetes_X[-20:]
 
 #Split the target into training/testing sets
 diabetes_Y_train = diabetes.target[:-20]
 diabetes_y_test = diabetes.target[-20:]
-
-# print(diabetes_X_train)
-# print(diabetes_Y_train)
-print('shape:', diabetes_X_train.shape)
-print('shape:', diabetes_Y_train.shape)
-
-# diabetes_y_train_reshaped = diabetes_Y_train.reshape(-1,1)
-# print('shape:', diabetes_y_train_reshaped.shape)
 
 #create linear regression object
 regr = linear_model.LinearRegression()
@@ -45,4 +37,15 @@ print("Mean squared error: %.2f"
 #explained variance score: 1 is perfect prediction
 print('Variance score: %.2f' % r2_score(diabetes_y_test, diabetes_y_pred))
 
+#plot outputs
+#plot against the x_test against y_test
+plt.scatter(diabetes_X_test, diabetes_y_test, color = 'black')
+
+#draw the line
+plt.plot(diabetes_X_test, diabetes_y_pred, color = 'blue', linewidth = 3)
+plt.xticks(())
+plt.yticks(())
+
+#display the map
+plt.show()
 
